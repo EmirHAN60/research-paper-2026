@@ -1,0 +1,5 @@
+﻿experiment,provider,origins,comparison,baseline,blocks,both_attempted,missing_baseline,missing_comparison,baseline_only_success,comparison_only_success,both_failed,complete_pairs,median_delta_ms,ci95_low_ms,ci95_high_ms,median_paired_pct_delta
+lookup,cloudflare,,doh_fresh,udp,300,300,0,0,0,0,0,300,48.36349999997765,47.720709999978546,48.90035000000171,248.8917814279821
+lookup,cloudflare,,doh_warm,udp,300,300,0,0,0,0,0,300,-1.7734000000782544,-2.012600000074599,-1.4483250000506813,-9.076001420592473
+lookup,google,,doh_fresh,udp,300,300,0,0,0,0,0,300,84.64004999998724,70.27294624999521,98.81274999998277,241.06203173670824
+lookup,google,,doh_warm,udp,300,300,0,0,0,0,0,300,7.121399999956338,6.578549999994721,7.8271537501059365,18.970047385039848

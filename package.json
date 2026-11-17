@@ -1,0 +1,13 @@
+{
+  "name": "secure-dns-research",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Reproducible UDP DNS and HTTP2 DoH measurements with a controlled browser fixture",
+  "dependencies": {
+    "playwright": "1.62.1"
+  },
+  "scripts": {
+    "test:dns": "node experiment/test_dns.mjs"
+  }
+}
