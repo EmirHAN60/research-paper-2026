@@ -133,7 +133,7 @@ OpenAI Codex assisted with design, source discovery, code, measurement execution
 
 ## Data and code availability
 
-Code, raw measurements, environment metadata, figures and execution evidence: https://github.com/EmirHAN60/research-paper-2026. Original and replication data remain separate. Metadata, raw data and executable analysis follow established networking reproducibility guidance (Bajpai et al., 2019).
+Code, raw measurements, environment metadata, figures and execution evidence: https://github.com/EmirHAN60/secure-dns-research. Original and replication data remain separate. Metadata, raw data and executable analysis follow established networking reproducibility guidance (Bajpai et al., 2019).
 
 ## References
 
