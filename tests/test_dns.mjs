@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import { makeQuery,parseResponse,seededRng,shuffle } from '../scripts/dns_client.mjs';
+const q=makeQuery('example.com',0x1234);
+assert.equal(q.toString('hex'),'123401000001000000000000076578616d706c6503636f6d0000010001');
+const a=Buffer.concat([Buffer.from('123481800001000100000000','hex'),q.subarray(12),Buffer.from('c00c000100010000012c00045db8d822','hex')]);
+assert.deepEqual(parseResponse(a,q).addresses,['93.184.216.34']);assert.equal(parseResponse(a,q).valid,true);assert.deepEqual(parseResponse(a,q).ttls,[300]);
+const badID=Buffer.from(a);badID[0]=0;assert.throws(()=>parseResponse(badID,q),/ID mismatch/);
+const badQ=Buffer.from(a);badQ[13]=0x78;assert.throws(()=>parseResponse(badQ,q),/Question mismatch/);
+const tc=Buffer.from(a);tc[2]|=2;assert.equal(parseResponse(tc,q).valid,false);
+const nx=Buffer.from(a);nx[3]|=3;assert.equal(parseResponse(nx,q).rcode,3);assert.equal(parseResponse(nx,q).valid,false);
+assert.throws(()=>parseResponse(a.subarray(0,a.length-2),q),/Truncated/);
+const qr=Buffer.from(a);qr[2]&=0x7f;assert.throws(()=>parseResponse(qr,q),/QR/);
+const loop=Buffer.concat([Buffer.from('123481800001000000000000','hex'),Buffer.from('c00c00010001','hex')]);assert.throws(()=>parseResponse(loop,q),/loop/);
+assert.deepEqual(shuffle([1,2,3,4],seededRng(7)),shuffle([1,2,3,4],seededRng(7)));
+assert.throws(()=>makeQuery('bad..com'),/Invalid/);
+console.log('PASS: wire query fixture, A answer/TTL, transaction/name/QR, truncation, RCODE, compression loop, RNG and invalid qname checks');
+

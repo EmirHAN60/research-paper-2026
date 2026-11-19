@@ -1,0 +1,143 @@
+{
+  "started_utc": "2026-11-19T19:16:48.312687+00:00",
+  "python": "3.12.14",
+  "packages": {
+    "numpy": "2.3.5",
+    "reportlab": "4.4.9",
+    "matplotlib": "3.10.7"
+  },
+  "mode": "offline reproduction of recorded observations; no network measurements",
+  "command_paths": "Displayed relative to the repository working directory; child stdout and stderr are captured without edits"
+}
+
+$ python.exe scripts\validate_package.py --raw-only
+{
+  "status": "PASS",
+  "protected_original_inputs": 5
+}
+
+$ node.exe --version
+v24.22.3
+
+$ node.exe tests\test_dns.mjs
+PASS: wire query fixture, A answer/TTL, transaction/name/QR, truncation, RCODE, compression loop, RNG and invalid qname checks
+
+$ python.exe -m unittest discover -s tests -p test_*.py -v
+test_bootstrap_is_reproducible_and_empty_input_is_null (test_analysis.AnalysisProperties.test_bootstrap_is_reproducible_and_empty_input_is_null) ... ok
+test_claimed_success_without_dns_gates_is_an_audit_error (test_analysis.AnalysisProperties.test_claimed_success_without_dns_gates_is_an_audit_error) ... ok
+test_duplicate_block_is_rejected (test_analysis.AnalysisProperties.test_duplicate_block_is_rejected) ... ok
+test_failed_page_with_incomplete_gates_is_retained_as_failure (test_analysis.AnalysisProperties.test_failed_page_with_incomplete_gates_is_retained_as_failure) ... ok
+test_failures_and_missing_comparisons_are_not_imputed (test_analysis.AnalysisProperties.test_failures_and_missing_comparisons_are_not_imputed) ... ok
+test_independent_wire_decoder_rejects_tampered_transaction (test_analysis.AnalysisProperties.test_independent_wire_decoder_rejects_tampered_transaction) ... ok
+test_invalid_time_is_not_a_success (test_analysis.AnalysisProperties.test_invalid_time_is_not_a_success) ... ok
+test_marginals_count_failed_attempts_without_using_their_latency (test_analysis.AnalysisProperties.test_marginals_count_failed_attempts_without_using_their_latency) ... ok
+test_no_successful_pairs_yields_no_effect_or_interval (test_analysis.AnalysisProperties.test_no_successful_pairs_yields_no_effect_or_interval) ... ok
+test_pair_before_aggregate_has_a_distinct_answer (test_analysis.AnalysisProperties.test_pair_before_aggregate_has_a_distinct_answer) ... ok
+test_pairing_keeps_reused_domain_names_in_separate_windows (test_analysis.AnalysisProperties.test_pairing_keeps_reused_domain_names_in_separate_windows) ... ok
+test_zero_baseline_has_delta_but_no_percentage (test_analysis.AnalysisProperties.test_zero_baseline_has_delta_but_no_percentage) ... ok
+test_default_inputs_work_from_an_unrelated_working_directory (test_analysis.CommandLineProperties.test_default_inputs_work_from_an_unrelated_working_directory) ... ok
+test_one_window_dataset_has_no_hardcoded_three_window_warning (test_analysis.CommandLineProperties.test_one_window_dataset_has_no_hardcoded_three_window_warning) ... ok
+test_broken_local_links_fail_without_network_access (test_package.PackageIntegrity.test_broken_local_links_fail_without_network_access) ... ok
+test_manifest_detects_changed_or_new_public_files (test_package.PackageIntegrity.test_manifest_detects_changed_or_new_public_files) ... ok
+test_protected_inputs_cannot_be_silently_replaced (test_package.PackageIntegrity.test_protected_inputs_cannot_be_silently_replaced) ... ok
+test_public_manifest_excludes_private_guide_and_local_dependencies (test_package.PackageIntegrity.test_public_manifest_excludes_private_guide_and_local_dependencies) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 1.516s
+
+OK
+
+$ python.exe scripts\analyze.py --dns data\dns_raw.jsonl --pages data\pages.jsonl --page-dns data\page-dns.jsonl --out results --expected-windows 3 --expected-reps 10 --strict
+{
+  "counts": {
+    "lookup_all_rows": 1920,
+    "lookup_measurements": 1800,
+    "pages": 360,
+    "page_dns_rows": 1788,
+    "lookup_phase_counts": {
+      "prime": 120,
+      "measure": 1800
+    },
+    "page_dns_phase_counts": {
+      "resolver-prewarm": 48,
+      "navigation": 1620,
+      "connection-prime": 120
+    }
+  },
+  "validation_errors": 0,
+  "transport_mismatches": 0,
+  "warnings": []
+}
+
+$ python.exe scripts\analyze.py --dns data\replication-2026-11-19\dns_raw.jsonl --pages data\replication-2026-11-19\pages.jsonl --page-dns data\replication-2026-11-19\page-dns.jsonl --out results\replication-2026-11-19 --expected-windows 3 --expected-reps 10 --strict
+{
+  "counts": {
+    "lookup_all_rows": 1920,
+    "lookup_measurements": 1800,
+    "pages": 360,
+    "page_dns_rows": 1788,
+    "lookup_phase_counts": {
+      "prime": 120,
+      "measure": 1800
+    },
+    "page_dns_phase_counts": {
+      "resolver-prewarm": 48,
+      "navigation": 1620,
+      "connection-prime": 120
+    }
+  },
+  "validation_errors": 0,
+  "transport_mismatches": 0,
+  "warnings": []
+}
+
+$ python.exe scripts\robustness.py --root .
+{"dataset": "original", "date": "2026-11-15", "contrasts": 12, "output": "C:\\Users\\emirh\\Documents\\Codex\\2026-11-15\\i\\outputs\\Secure_DNS_Research\\results\\robustness.json"}
+{"dataset": "replication-2026-11-19", "date": "2026-11-19", "contrasts": 12, "output": "C:\\Users\\emirh\\Documents\\Codex\\2026-11-15\\i\\outputs\\Secure_DNS_Research\\results\\replication-2026-11-19\\robustness.json"}
+
+$ python.exe scripts\plot_results.py --root .
+{"dataset": "original", "figures": 7, "directory": "C:\\Users\\emirh\\Documents\\Codex\\2026-11-15\\i\\outputs\\Secure_DNS_Research\\figures"}
+{"dataset": "replication-2026-11-19", "figures": 7, "directory": "C:\\Users\\emirh\\Documents\\Codex\\2026-11-15\\i\\outputs\\Secure_DNS_Research\\figures\\replication-2026-11-19"}
+
+$ python.exe scripts\build_paper.py --root .
+{
+  "main_words_including_abstract_tables_captions_declarations": 2467,
+  "abstract_words": 280,
+  "reference_count": 18,
+  "lookup_attempts_total": 3600,
+  "page_attempts_total": 720,
+  "dates": [
+    "2026-11-15",
+    "2026-11-19"
+  ],
+  "pdf": "Secure_DNS_Research_Paper.pdf"
+}
+
+$ python.exe scripts\validate_package.py --root . --ignore-manifest
+{
+  "status": "PASS",
+  "protected_original_inputs": 5,
+  "collection_snapshot_files": 3,
+  "datasets": [
+    {
+      "data": "data",
+      "lookup_all_rows": 1920,
+      "lookup_measurements": 1800,
+      "pages": 360,
+      "page_dns_rows": 1788
+    },
+    {
+      "data": "data/replication-2026-11-19",
+      "lookup_all_rows": 1920,
+      "lookup_measurements": 1800,
+      "pages": 360,
+      "page_dns_rows": 1788
+    }
+  ],
+  "figure_stems": 15,
+  "local_links_checked": 95,
+  "manifest_files": null,
+  "network_access": "none"
+}
+
+All offline research checks completed successfully.

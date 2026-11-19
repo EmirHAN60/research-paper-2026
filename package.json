@@ -1,13 +1,21 @@
 {
   "name": "secure-dns-research",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "type": "module",
   "description": "Reproducible UDP DNS and HTTP2 DoH measurements with a controlled browser fixture",
   "dependencies": {
     "playwright": "1.62.1"
   },
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
-    "test:dns": "node experiment/test_dns.mjs"
+    "test": "node tests/test_dns.mjs",
+    "test:dns": "node tests/test_dns.mjs",
+    "test:live": "node tests/test_live.mjs",
+    "test:analysis": "python -m unittest discover -s tests -p test_*.py -v",
+    "analyze": "python scripts/analyze.py --strict",
+    "reproduce": "python scripts/reproduce.py"
   }
 }

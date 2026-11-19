@@ -1,0 +1,20 @@
+{
+  "purpose": "Exact task-local JavaScript sources used to collect the November 19 replication",
+  "started_utc": "2026-11-19T18:58:19.475Z",
+  "finished_utc": "2026-11-19T19:09:50.155Z",
+  "seed": 20261119,
+  "windows": 3,
+  "repetitions": 10,
+  "scheduled_window_interval_seconds": 300,
+  "serialization": "Each DNS window completed before its 120 page attempts; the next DNS window retained its five-minute target start",
+  "dataset": "data/replication-2026-11-19",
+  "node": "v24.22.3",
+  "playwright": "1.62.1",
+  "browser": "157.0.8103.79",
+  "screenshot_flag_used": false,
+  "script_sha256": {
+    "dns_client.mjs": "0fbd5dba7b044d50af89c3bb5ca4a684198e180d77a88b3e2338bcbbf59b21a1",
+    "measure_dns.mjs": "1cd62adf2533fb78e21638ce04342bb2402ccbafd50d410338e54e6ba1da1f35",
+    "page-load.mjs": "01553be0750656989de0e3f1975f7279f76b03ca229d6eb8f783f0a8bdd2039a"
+  }
+}

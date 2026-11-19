@@ -1,0 +1,10 @@
+{
+  "captured_utc": "2026-11-19T19:11:29.520Z",
+  "page_id": "evidence-google-8-0-udp",
+  "provider": "google",
+  "mode": "udp",
+  "origins": 8,
+  "loaded_images": 7,
+  "source": "Actual Playwright browser screenshot after a successful evidence-only fixture navigation",
+  "screenshot": "fixture-eight-hostnames.png"
+}

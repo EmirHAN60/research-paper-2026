@@ -1,0 +1,10 @@
+{
+  "provenance": "SHA-256 of the original November 15 inputs recorded before the November 19 revision",
+  "files": {
+    "data/dns_raw.jsonl": "e55d8daa164d725a1e992e640be71c9d1542a5c71c875721b04d0c19f4437228",
+    "data/environment.json": "ed3b6f37b80c4291fa3bd3cc9c4bc4786c813f544fec05e0085dd5cdf123abb6",
+    "data/page-dns.jsonl": "88d9c70e7157be6b2003742b3b29b29281df55cee719f512afdfe8c2b0057119",
+    "data/page-environment.jsonl": "5c9de48c92644e45be1af3b127ce63b203f834f2fc183b9fecc0901392f3b3b3",
+    "data/pages.jsonl": "1b0bfd6ddd18c291ef664ceefddee8d4e507bb91f535da24636c58c67433dff5"
+  }
+}

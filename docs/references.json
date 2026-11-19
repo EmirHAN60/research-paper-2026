@@ -1,0 +1,455 @@
+{
+  "checked_date": "2026-11-19",
+  "scope": "Eighteen sources with distinct roles; cite only where their claims are used. Technical claims are based on primary papers or standards. This project is an introductory replication and controlled demonstration, not a novel protocol or first global measurement.",
+  "references": [
+    {
+      "id": "bottger2019",
+      "title": "An Empirical Study of the Cost of DNS-over-HTTPS",
+      "authors": [
+        "Böttger, T.",
+        "Cuadrado, F.",
+        "Antichi, G.",
+        "Fernandes, E. L.",
+        "Tyson, G.",
+        "Castro, I.",
+        "Uhlig, S."
+      ],
+      "year": 2019,
+      "doi": "10.1145/3355369.3355575",
+      "url": "https://doi.org/10.1145/3355369.3355575",
+      "full_text_url": "https://arxiv.org/pdf/1909.06192",
+      "source_type": "Peer-reviewed conference paper",
+      "apa": "Böttger, T., Cuadrado, F., Antichi, G., Fernandes, E. L., Tyson, G., Castro, I., & Uhlig, S. (2019). An empirical study of the cost of DNS-over-HTTPS. In Proceedings of the Internet Measurement Conference (pp. 15–21). Association for Computing Machinery. https://doi.org/10.1145/3355369.3355575",
+      "claims": [
+        {
+          "claim": "Persistent connections amortize setup overhead, while larger DNS costs need not translate directly to larger page-load costs.",
+          "locator": "Sections 4–5, author PDF pp. 4–6",
+          "relation": "Motivates separate fresh/established treatments and separate lookup versus browser outcomes.",
+          "boundary": "One university vantage point and historical software; its numerical effects are not predictions for this dataset."
+        }
+      ],
+      "metadata_note": "Proceedings pp. 15–21 verified against authors' institutional publication records; full-text preprint uses its own PDF pagination.",
+      "key": "bottger2019"
+    },
+    {
+      "id": "hounsel2020",
+      "title": "Comparing the Effects of DNS, DoT, and DoH on Web Performance",
+      "authors": [
+        "Hounsel, A.",
+        "Borgolte, K.",
+        "Schmitt, P.",
+        "Holland, J.",
+        "Feamster, N."
+      ],
+      "year": 2020,
+      "doi": "10.1145/3366423.3380139",
+      "url": "https://doi.org/10.1145/3366423.3380139",
+      "full_text_url": "https://softsec.rub.de/files/pdf/www2020-dns-dot-doh.pdf",
+      "source_type": "Peer-reviewed conference paper",
+      "apa": "Hounsel, A., Borgolte, K., Schmitt, P., Holland, J., & Feamster, N. (2020). Comparing the effects of DNS, DoT, and DoH on web performance. In Proceedings of The Web Conference 2020 (pp. 562–572). Association for Computing Machinery. https://doi.org/10.1145/3366423.3380139",
+      "claims": [
+        {
+          "claim": "DNS response-time rankings and browser page-load rankings can differ; network conditions and retransmission behavior matter.",
+          "locator": "Abstract; Sections 3.1–3.2 and 4",
+          "relation": "Supports treating lookup latency and load-event time as separate outcomes, with actual browser measurement.",
+          "boundary": "Their native Firefox/global-cloud experiment is substantially broader than our intercepted-content fixture."
+        }
+      ],
+      "metadata_note": "Author-hosted publication page and author CV verify final venue/year and pp. 562–572; preprint originated in 2019 but publication year is 2020.",
+      "key": "hounsel2020"
+    },
+    {
+      "id": "hounsel2021",
+      "title": "Can Encrypted DNS Be Fast?",
+      "authors": [
+        "Hounsel, A.",
+        "Schmitt, P.",
+        "Borgolte, K.",
+        "Feamster, N."
+      ],
+      "year": 2021,
+      "doi": "10.1007/978-3-030-72582-2_26",
+      "url": "https://link.springer.com/chapter/10.1007/978-3-030-72582-2_26",
+      "full_text_url": "https://kevin.borgolte.me/files/pdf/pam2021-can-encrypted-dns-be-fast.pdf",
+      "source_type": "Peer-reviewed conference chapter",
+      "apa": "Hounsel, A., Schmitt, P., Borgolte, K., & Feamster, N. (2021). Can encrypted DNS be fast? In O. Hohlfeld, A. Lutu, & D. Levin (Eds.), Passive and active measurement (pp. 444–459). Springer. https://doi.org/10.1007/978-3-030-72582-2_26",
+      "claims": [
+        {
+          "claim": "Connection setup and query response time are separate costs, and no resolver/protocol combination performs best for every measured client.",
+          "locator": "Sections 2.1–2.3 and 3.1; publisher full text",
+          "relation": "Motivates verified connection-state treatments and conditional, provider-specific interpretation.",
+          "boundary": "2,693 analyzed US home-network devices; no browser page-load measurements. This does not establish our short-window sign changes' cause."
+        }
+      ],
+      "metadata_note": "Use the final publisher count 2,693; one author webpage has a discrepant older count.",
+      "key": "hounsel2021"
+    },
+    {
+      "id": "chhabra2021",
+      "title": "Measuring DNS-over-HTTPS Performance Around the World",
+      "authors": [
+        "Chhabra, R.",
+        "Murley, P.",
+        "Kumar, D.",
+        "Bailey, M.",
+        "Wang, G."
+      ],
+      "year": 2021,
+      "doi": "10.1145/3487552.3487849",
+      "url": "https://doi.org/10.1145/3487552.3487849",
+      "full_text_url": "https://kumarde.com/papers/imc_doh.pdf",
+      "source_type": "Peer-reviewed conference paper",
+      "apa": "Chhabra, R., Murley, P., Kumar, D., Bailey, M., & Wang, G. (2021). Measuring DNS-over-HTTPS performance around the world. In Proceedings of the 21st ACM Internet Measurement Conference (pp. 351–365). Association for Computing Machinery. https://doi.org/10.1145/3487552.3487849",
+      "claims": [
+        {
+          "claim": "The worldwide comparison uses clients' default resolver baseline, unique names under a controlled authoritative zone, and explicit connection-reuse distinctions.",
+          "locator": "Sections 3.1 and 3.4, printed pp. 353 and 355; Section 5 terminology, p. 357; cache limitation in Section 7, p. 362",
+          "relation": "Required anchor; we adapt the connection distinction while using fixed providers and openly unknown recursive-cache state.",
+          "boundary": "Our data do not replicate their worldwide coverage, cache-miss control or default-resolver estimand."
+        }
+      ],
+      "key": "chhabra2021"
+    },
+    {
+      "id": "moura2019",
+      "title": "Cache Me If You Can: Effects of DNS Time-to-Live",
+      "authors": [
+        "Moura, G. C. M.",
+        "Heidemann, J.",
+        "Schmidt, R. de O.",
+        "Hardaker, W."
+      ],
+      "year": 2019,
+      "doi": "10.1145/3355369.3355568",
+      "url": "https://doi.org/10.1145/3355369.3355568",
+      "full_text_url": "https://ant.isi.edu/~hardaker/papers/2019-10-cache-me-ttls.pdf",
+      "source_type": "Peer-reviewed conference paper",
+      "apa": "Moura, G. C. M., Heidemann, J., Schmidt, R. de O., & Hardaker, W. (2019). Cache me if you can: Effects of DNS time-to-live. In Proceedings of the Internet Measurement Conference (pp. 101–115). Association for Computing Machinery. https://doi.org/10.1145/3355369.3355568",
+      "claims": [
+        {
+          "claim": "TTL effects emerge from distributed caches, differing record sources and resolver behavior, and materially affect observed DNS latency.",
+          "locator": "Introduction, printed p. 101; Sections 3–4, pp. 103–107",
+          "relation": "Explains why direct queries and prewarming do not prove a globally fixed recursive-cache state; TTLs remain diagnostics.",
+          "boundary": "Do not attribute our time-window changes to cache expiration without authoritative/cache-hit evidence."
+        }
+      ],
+      "key": "moura2019"
+    },
+    {
+      "id": "schmidt2017",
+      "title": "Anycast Latency: How Many Sites Are Enough?",
+      "authors": [
+        "de Oliveira Schmidt, R.",
+        "Heidemann, J.",
+        "Kuipers, J. H."
+      ],
+      "year": 2017,
+      "doi": "10.1007/978-3-319-54328-4_14",
+      "url": "https://link.springer.com/chapter/10.1007/978-3-319-54328-4_14",
+      "full_text_url": "https://ant.isi.edu/~johnh/PAPERS/Schmidt17a.pdf",
+      "source_type": "Peer-reviewed conference chapter",
+      "apa": "de Oliveira Schmidt, R., Heidemann, J., & Kuipers, J. H. (2017). Anycast latency: How many sites are enough? In M. A. Kaafar, S. Uhlig, & J. Amann (Eds.), Passive and active measurement (pp. 188–200). Springer. https://doi.org/10.1007/978-3-319-54328-4_14",
+      "claims": [
+        {
+          "claim": "An anycast IP is announced from multiple physical sites; routing policies affect client-to-site mapping and latency.",
+          "locator": "Abstract and Section 1, author PDF pp. 1–2; publisher abstract",
+          "relation": "Pinning provider IP and SNI controls destination service identity, without proving identical physical site or backend cache.",
+          "boundary": "Their study concerns four root services. It does not demonstrate a route or site change in our recursive-resolver trials."
+        }
+      ],
+      "metadata_note": "Publisher citation styles the family name de Oliveira Schmidt; author paper often abbreviates it Ricardo de O. Schmidt. Cite consistently.",
+      "key": "schmidt2017"
+    },
+    {
+      "id": "kosek2022",
+      "title": "DNS Privacy with Speed? Evaluating DNS over QUIC and Its Impact on Web Performance",
+      "authors": [
+        "Kosek, M.",
+        "Schumann, L.",
+        "Marx, R.",
+        "Doan, T. V.",
+        "Bajpai, V."
+      ],
+      "year": 2022,
+      "doi": "10.1145/3517745.3561445",
+      "url": "https://doi.org/10.1145/3517745.3561445",
+      "full_text_url": "https://vaibhavbajpai.com/documents/papers/proceedings/doq-imc-2022.pdf",
+      "source_type": "Peer-reviewed conference paper",
+      "apa": "Kosek, M., Schumann, L., Marx, R., Doan, T. V., & Bajpai, V. (2022). DNS privacy with speed? Evaluating DNS over QUIC and its impact on web performance. In Proceedings of the 22nd ACM Internet Measurement Conference (pp. 44–50). Association for Computing Machinery. https://doi.org/10.1145/3517745.3561445",
+      "claims": [
+        {
+          "claim": "Distributed measurements distinguish handshake from resolution time and evaluate DoQ against HTTP/2 DoH, with session resumption explicitly recorded.",
+          "locator": "Sections 2–3.2, author PDF pp. 2–5; especially Section 3, p. 3",
+          "relation": "Supports treating HTTP version, resumption and transport as experimental conditions, rather than a single generic encrypted-DNS cost.",
+          "boundary": "DoQ and resumed TLS are outside our non-resumed HTTP/2 treatments; do not import their speedups into our results."
+        }
+      ],
+      "key": "kosek2022"
+    },
+    {
+      "id": "lelouet2024",
+      "title": "Effects of Secured DNS Transport on Resolver Performance",
+      "authors": [
+        "Le Louët, E.",
+        "Blin, A.",
+        "Sopena, J.",
+        "Haddadou, K.",
+        "Amaou, A."
+      ],
+      "year": 2024,
+      "doi": "10.52953/NUXL5710",
+      "url": "https://www.itu.int/pub/S-JNL-VOL5.ISSUE1-2024-A04",
+      "full_text_url": "https://www.itu.int/dms_pub/itu-s/opb/jnl/S-JNL-VOL5.ISSUE1-2024-A04-PDF-E.pdf",
+      "source_type": "Peer-reviewed journal article",
+      "apa": "Le Louët, E., Blin, A., Sopena, J., Haddadou, K., & Amaou, A. (2024). Effects of secured DNS transport on resolver performance. ITU Journal on Future and Evolving Technologies, 5(1), 47–61. https://doi.org/10.52953/NUXL5710",
+      "claims": [
+        {
+          "claim": "Resolver resource cost can be separated into connection establishment, connection upkeep and message processing; client connection behavior affects server load.",
+          "locator": "Sections 4–5, particularly 5.1–5.5, printed pp. 50–58",
+          "relation": "Provides the computer-architecture connection while showing that elapsed lookup latency is not a CPU-cycle, memory or energy measurement.",
+          "boundary": "Their controlled server benchmarks and throughput costs cannot be estimated from our client-side wall-clock delays."
+        }
+      ],
+      "metadata_note": "ITU landing metadata and article byline print Ahmed Amaou, while the author biography on p. 61 prints Ahmed Amamou. The APA string preserves the published byline/metadata. Do not silently claim these spellings are identical.",
+      "key": "lelouet2024"
+    },
+    {
+      "id": "sengupta2024",
+      "title": "On Cross-Layer Interactions of QUIC, Encrypted DNS and HTTP/3: Design, Evaluation, and Dataset",
+      "authors": [
+        "Sengupta, J.",
+        "Kosek, M.",
+        "Fries, J.",
+        "Ferlin-Reiter, S.",
+        "Bajpai, V."
+      ],
+      "year": 2024,
+      "doi": "10.1109/TNSM.2024.3383787",
+      "url": "https://doi.org/10.1109/TNSM.2024.3383787",
+      "full_text_url": "https://vaibhavbajpai.com/documents/papers/proceedings/quic-tnsm-2024.pdf",
+      "source_type": "Peer-reviewed journal article",
+      "apa": "Sengupta, J., Kosek, M., Fries, J., Ferlin-Reiter, S., & Bajpai, V. (2024). On cross-layer interactions of QUIC, encrypted DNS and HTTP/3: Design, evaluation, and dataset. IEEE Transactions on Network and Service Management, 21(3), 2992–3007. https://doi.org/10.1109/TNSM.2024.3383787",
+      "claims": [
+        {
+          "claim": "DNS and content-transport handshakes interact on the page-loading path; coalescing DoQ and HTTP/3 changes the setup structure.",
+          "locator": "Abstract, Section I and Figure 1, author PDF pp. 1–2",
+          "relation": "Explains why a DNS-gated local-content fixture cannot estimate real content-transport, connection-coalescing or CDN effects.",
+          "boundary": "Do not describe their cross-layer gains as a property measured by our HTTP/2-only fixture."
+        }
+      ],
+      "metadata_note": "Final journal byline has five authors. Earlier arXiv metadata includes a different author list; use the final journal list above. Publisher issue metadata verifies pp. 2992–3007.",
+      "key": "sengupta2024"
+    },
+    {
+      "id": "bielefeld2026",
+      "title": "The Future of DNS Privacy: A Comparison of DNS over QUIC and DNS over HTTP/3",
+      "authors": [
+        "Bielefeld, P.",
+        "Hoffmann, F.",
+        "Sassalla, S.",
+        "ververis, v.",
+        "Bajpai, V."
+      ],
+      "year": 2026,
+      "doi": "10.1007/978-3-032-18268-5_10",
+      "url": "https://link.springer.com/chapter/10.1007/978-3-032-18268-5_10",
+      "full_text_url": "https://hpi.de/fileadmin/user_upload/90_Research_Groups/bajpai/Publications/2026-pam-doq-doh3.pdf",
+      "source_type": "Peer-reviewed conference chapter",
+      "apa": "Bielefeld, P., Hoffmann, F., Sassalla, S., ververis, v., & Bajpai, V. (2026). The future of DNS privacy: A comparison of DNS over QUIC and DNS over HTTP/3. In S. Ferlin-Reiter, R. Fontugne, & J. Ullrich (Eds.), Passive and active measurement (pp. 202–228). Springer. https://doi.org/10.1007/978-3-032-18268-5_10",
+      "claims": [
+        {
+          "claim": "A current study combines resolver feature probing with browser experiments; performance depends on supported resumption/0-RTT behavior, and DNS delay does not necessarily become equivalent page-load delay.",
+          "locator": "Section 3.1–3.4, author PDF pp. 10–12; Sections 4–6 and conclusion, pp. 16–23",
+          "relation": "Makes the literature current and confines our observations to h2 without resumption, while supporting separate application measurements.",
+          "boundary": "Their DoQ/DoH3 and Firefox-proxy results are not interchangeable with our HTTP/2 local-content fixture."
+        }
+      ],
+      "metadata_note": "Publisher first online 10 March 2026, LNCS 16477. Publisher spells Sassalla; the author manuscript byline spells Sasalla. Use the publisher's spelling and preserve ververis's preferred lowercase form.",
+      "key": "bielefeld2026"
+    },
+    {
+      "id": "rfc1035",
+      "title": "Domain Names—Implementation and Specification",
+      "authors": [
+        "Mockapetris, P."
+      ],
+      "year": 1987,
+      "doi": "10.17487/RFC1035",
+      "url": "https://www.rfc-editor.org/rfc/rfc1035.html",
+      "source_type": "IETF Internet Standard RFC",
+      "apa": "Mockapetris, P. (1987). Domain names—Implementation and specification (RFC 1035). RFC Editor. https://doi.org/10.17487/RFC1035",
+      "claims": [
+        {
+          "claim": "DNS message structure, UDP port 53 transport and TTL-governed record caching are separately specified.",
+          "locator": "Sections 3.2.1, 4.1, 4.2.1 and 7.4",
+          "relation": "Basis for matching wire-format A queries and independently validating stored responses.",
+          "boundary": "Bypassing the OS resolver does not remove recursive caching; that is an inference from the separate cache layers."
+        }
+      ],
+      "key": "rfc1035"
+    },
+    {
+      "id": "rfc8484",
+      "title": "DNS Queries over HTTPS (DoH)",
+      "authors": [
+        "Hoffman, P.",
+        "McManus, P."
+      ],
+      "year": 2018,
+      "doi": "10.17487/RFC8484",
+      "url": "https://www.rfc-editor.org/rfc/rfc8484",
+      "source_type": "IETF Standards Track RFC",
+      "apa": "Hoffman, P., & McManus, P. (2018). DNS queries over HTTPS (DoH) (RFC 8484). RFC Editor. https://doi.org/10.17487/RFC8484",
+      "claims": [
+        {
+          "claim": "DoH maps DNS messages to HTTP exchanges; HTTP/2 is recommended, HTTP and DNS caches interact, and transport security is distinct from DNSSEC.",
+          "locator": "Sections 4, 5.1–5.4 and 9",
+          "relation": "Protocol definition, wire-format POST validation and precise privacy framing.",
+          "boundary": "DoH protects the client-resolver channel, not anonymity from the resolver; no privacy effectiveness was tested."
+        }
+      ],
+      "key": "rfc8484"
+    },
+    {
+      "id": "rfc9113",
+      "title": "HTTP/2",
+      "authors": [
+        "Thomson, M.",
+        "Benfield, C."
+      ],
+      "year": 2022,
+      "doi": "10.17487/RFC9113",
+      "url": "https://www.rfc-editor.org/rfc/rfc9113.html",
+      "source_type": "IETF Standards Track RFC",
+      "apa": "Thomson, M., & Benfield, C. (Eds.). (2022). HTTP/2 (RFC 9113). RFC Editor. https://doi.org/10.17487/RFC9113",
+      "claims": [
+        {
+          "claim": "HTTP/2 provides streams, field compression and connection management over TCP.",
+          "locator": "Abstract; Sections 5 and 9",
+          "relation": "Basis for h2 negotiation and one shared connection across a page's concurrent hostname gates.",
+          "boundary": "Multiplexed streams do not make HTTP/2 equivalent to QUIC or eliminate all TCP-level blocking."
+        }
+      ],
+      "key": "rfc9113"
+    },
+    {
+      "id": "rfc9250",
+      "title": "DNS over Dedicated QUIC Connections",
+      "authors": [
+        "Huitema, C.",
+        "Dickinson, S.",
+        "Mankin, A."
+      ],
+      "year": 2022,
+      "doi": "10.17487/RFC9250",
+      "url": "https://www.rfc-editor.org/rfc/rfc9250.html",
+      "source_type": "IETF Standards Track RFC",
+      "apa": "Huitema, C., Dickinson, S., & Mankin, A. (2022). DNS over dedicated QUIC connections (RFC 9250). RFC Editor. https://doi.org/10.17487/RFC9250",
+      "claims": [
+        {
+          "claim": "DoQ is a dedicated DNS mapping over QUIC with resumption, 0-RTT and persistent-connection considerations.",
+          "locator": "Sections 3.2, 4.5 and 5.5.1",
+          "relation": "Defines an unmeasured transport boundary and a concrete future comparison.",
+          "boundary": "A standards mechanism is not empirical proof of a universal speed advantage."
+        }
+      ],
+      "key": "rfc9250"
+    },
+    {
+      "id": "rfc9114",
+      "title": "HTTP/3",
+      "authors": [
+        "Bishop, M."
+      ],
+      "year": 2022,
+      "doi": "10.17487/RFC9114",
+      "url": "https://www.rfc-editor.org/rfc/rfc9114.html",
+      "source_type": "IETF Standards Track RFC",
+      "apa": "Bishop, M. (Ed.). (2022). HTTP/3 (RFC 9114). RFC Editor. https://doi.org/10.17487/RFC9114",
+      "claims": [
+        {
+          "claim": "HTTP/3 maps HTTP onto QUIC, with transport and stream-delivery behavior distinct from TCP-based HTTP/2.",
+          "locator": "Sections 1.1–1.2 and 3.2–3.3",
+          "relation": "Explains why measured h2 DoH overhead cannot be extrapolated to DoH3.",
+          "boundary": "Dedicated DoQ and DoH over HTTP/3 remain different protocol mappings."
+        }
+      ],
+      "key": "rfc9114"
+    },
+    {
+      "id": "navigation2026",
+      "title": "Navigation Timing Level 2",
+      "authors": [
+        "Weiss, Y.",
+        "Rosenthal, N."
+      ],
+      "year": 2026,
+      "doi": null,
+      "url": "https://www.w3.org/TR/2026/WD-navigation-timing-2-20261102/",
+      "source_type": "W3C Working Draft",
+      "apa": "Weiss, Y., & Rosenthal, N. (Eds.). (2026, November 2). Navigation timing level 2 (W3C Working Draft). World Wide Web Consortium. https://www.w3.org/TR/2026/WD-navigation-timing-2-20261102/",
+      "claims": [
+        {
+          "claim": "A navigation entry starts at zero and its duration ends at loadEventEnd, after load-event handling.",
+          "locator": "Sections 3.1 and 3.3",
+          "relation": "Defines the fixture's browser metric precisely.",
+          "boundary": "A load event is not visual completeness, interactivity, or completion of all future lazy-loaded content."
+        }
+      ],
+      "key": "navigation2026"
+    },
+    {
+      "id": "field2007",
+      "title": "Bootstrapping Clustered Data",
+      "authors": [
+        "Field, C. A.",
+        "Welsh, A. H."
+      ],
+      "year": 2007,
+      "doi": "10.1111/j.1467-9868.2007.00593.x",
+      "url": "https://rss.onlinelibrary.wiley.com/doi/abs/10.1111/j.1467-9868.2007.00593.x",
+      "full_text_url": "https://bemlar.ism.ac.jp/zhuang/Refs/Refs/field2007jrssb.pdf",
+      "source_type": "Peer-reviewed methodological journal article",
+      "apa": "Field, C. A., & Welsh, A. H. (2007). Bootstrapping clustered data. Journal of the Royal Statistical Society: Series B (Statistical Methodology), 69(3), 369–390. https://doi.org/10.1111/j.1467-9868.2007.00593.x",
+      "claims": [
+        {
+          "claim": "Bootstrap validity depends on the dependence structure and model used for clustered observations.",
+          "locator": "Abstract and Section 1, pp. 369–371",
+          "relation": "Motivates preserving matched blocks and qualifying conditional uncertainty estimates.",
+          "boundary": "Does not validate this exact median bootstrap or well-calibrated population inference from three short windows; those cautions are our methodological judgment."
+        }
+      ],
+      "key": "field2007"
+    },
+    {
+      "id": "bajpai2019",
+      "title": "The Dagstuhl Beginners Guide to Reproducibility for Experimental Networking Research",
+      "authors": [
+        "Bajpai, V.",
+        "Brunstrom, A.",
+        "Feldmann, A.",
+        "Kellerer, W.",
+        "Pras, A.",
+        "Schulzrinne, H.",
+        "Smaragdakis, G.",
+        "Wählisch, M.",
+        "Wehrle, K."
+      ],
+      "year": 2019,
+      "doi": "10.1145/3314212.3314217",
+      "url": "https://doi.org/10.1145/3314212.3314217",
+      "full_text_url": "https://netd.cs.tu-dresden.de/papers/bbfkp-dbgre-19.pdf",
+      "source_type": "Primary expert editorial and methodological guide; explicitly not peer reviewed",
+      "apa": "Bajpai, V., Brunstrom, A., Feldmann, A., Kellerer, W., Pras, A., Schulzrinne, H., Smaragdakis, G., Wählisch, M., & Wehrle, K. (2019). The Dagstuhl beginners guide to reproducibility for experimental networking research. ACM SIGCOMM Computer Communication Review, 49(1), 24–30. https://doi.org/10.1145/3314212.3314217",
+      "claims": [
+        {
+          "claim": "Operational Internet measurements require repeated observations, documented metadata, raw-data preservation, validated tooling and explicit time/vantage-point scope.",
+          "locator": "Sections 2.1–2.4 and 3.3, printed pp. 25–28",
+          "relation": "Supports machine-readable raw data, seeds, validation, timestamps and a repeatable analysis package.",
+          "boundary": "Code/data availability improves inspectability; it does not guarantee future Internet timings reproduce numerically. This is not a peer-reviewed empirical DNS study."
+        }
+      ],
+      "key": "bajpai2019"
+    }
+  ]
+}

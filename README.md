@@ -1,97 +1,120 @@
-# Secure DNS performance research
+# Secure DNS lookup and page load measurements
 
-**Author:** Emirhan TEKBAŞ (75831), Computer Engineering, Vistula University.
+**Emirhan TEKBAŞ · Student ID 75831 · Computer Engineering · Vistula University**
 
-This package accompanies *Performance Overhead of Secure DNS: Evaluating Lookup Latency and Page Load Impact of DNS over HTTPS Versus Standard UDP DNS* for Architecture of Computers, 2026/2027.
+Architecture of Computers (CII3SE003CI), 2026/2027
 
-The paper reports genuine measurements collected on 15 November 2026. It contains 1,800 measured direct lookups and 360 controlled browser navigations. Priming records are retained separately. Preparation smoke tests are excluded. This is a single-host, single-network study with three nearby windows, not a global or long-term benchmark.
+This project compares standard UDP DNS with DNS over HTTPS using the **same provider**, while separating a **fresh HTTPS connection** from an **established connection**. Cloudflare and Google are measured independently. A controlled browser fixture examines how live DNS waiting affects a fixed page with one or eight hostnames.
 
-## Before submission
+The original measurements were collected on **15 November 2026**. A separate **19 November 2026** replication repeats the workload with a different randomization seed. The dates remain separate throughout the analysis. Read the [paper PDF](Secure_DNS_Research_Paper.pdf) or the [illustrated manuscript](manuscript.md).
 
-The PDF contains the author's supplied identity and repository URL, https://github.com/EmirHAN60/research-paper-2026 . Upload the package contents to that repository and confirm reviewer access before submitting the PDF. The local package does not by itself establish that the remote repository contains the evidence. Inspect the final PDF before uploading it to Platon.
+## Research question
 
-Read `SON_ADIMLAR_TR.md`, verify the sources and calculations independently, and retain an accurate AI-use declaration. The handbook permits AI assistance but makes the student responsible for understanding and defending the work.
+How much of the DoH lookup difference remains after connection setup is excluded, how sensitive is that difference to the window and date, and how does DNS waiting propagate through a fixed browser resource graph?
 
-## Files
+This is an introductory replication and controlled comparison. It does not propose a new transport or claim a worldwide provider ranking.
 
-- `Secure_DNS_Research_Paper.pdf`: formatted English paper with the author's identity and supplied evidence URL.
-- `manuscript.md`: readable, editable manuscript with calculated results and tables.
-- `paper_source.md`: manuscript template used by the builder. Numeric results are inserted from the recorded-data analysis.
-- `profile.json`: author information and repository URL for the builder.
-- `data/dns_raw.jsonl`: all direct-DNS attempts, including priming, query/response wire bytes, timings and transport metadata.
-- `data/pages.jsonl`: navigation timings and validation for all controlled page attempts.
-- `data/page-dns.jsonl`: nested DNS gates, prewarming and connection primers for the page fixture.
-- `data/environment.json` and `data/page-environment.jsonl`: software, hardware and collection parameters, without local interface identifiers.
-- `results/summary.json`: authoritative analysis, including validation, counts, bootstrap method and warnings.
-- `results/*.csv`: marginal, paired, per-window, per-domain and leave-one-window-out results. The primary effect is the median paired difference.
-- `experiment/dns_client.mjs`, `experiment/measure_dns.mjs`, `experiment/test_dns.mjs`: direct clients, collector and packet checks.
-- `page-load.mjs`: complete HTML/image fixture generator and controlled browser collector.
-- `analyze.py`: the sole authoritative statistical analysis used by the paper.
-- `build_paper.py`: PDF and Markdown builder from `results/summary.json`.
-- `PROTOCOL.md`, `REFERENCES.md`, `LIMITATIONS.md`: procedure, verified primary links and interpretation boundaries.
-- `SHA256SUMS.txt`: integrity manifest for the distributed files.
+## Main observations
 
-## Dependencies
+The original session contains **1,800 measured lookups and 360 browser navigations**, with priming records retained separately.
 
-Collection used Node.js 24.22.1, OpenSSL 3.5.9, Playwright 1.62.1 and installed Google Chrome 157.0.8103.51 on Windows x64. Analysis/build used Python 3.12.14, NumPy 2.3.5 and ReportLab 4.4.9. Exact recorded machine details are in `data/environment.json`. The direct DNS client has no third-party dependencies.
+| Original session, 15 November | UDP median | Fresh DoH median | Established DoH median | Established paired difference |
+|---|---:|---:|---:|---:|
+| Cloudflare | 19.5 ms | 68.1 ms | 17.8 ms | −1.8 ms |
+| Google | 36.5 ms | 134.9 ms | 43.8 ms | +7.1 ms |
 
-For an ordinary local terminal, install a compatible recent Node.js and Python, then run:
+The last column is the **median of matched differences**, not subtraction of the marginal medians. Google's established-session contrast changed from **+9.6 ms to −5.1 ms to +8.7 ms** across the original windows. A pooled estimate conceals that sensitivity.
+
+![Original lookup latency distributions](figures/lookup_ecdf.png)
+
+![Original paired effects across windows](figures/window_effects.png)
+
+![Separate-date lookup comparisons](figures/cross_date_comparison.png)
+
+See [extended results](docs/RESULTS.md) for the second-date values, condition counts, failures and sensitivity analyses. Primary intervals condition on observed windows. Domain-cluster resampling is an additional check, not a correction for unmeasured routing or time dependence.
+
+## What distinguishes this comparison
+
+| Control | Purpose | Remaining uncertainty |
+|---|---|---|
+| Same operator and pinned provider IP | Reduces an infrastructure change in the baseline | Anycast site, front end and cache may differ |
+| Recorded HTTP/2, TLS and connection state | Verifies fresh and established treatments | Client and service costs remain combined |
+| Matched randomized blocks | Compares the same provider, name, window and repetition | Conditions may change between adjacent queries |
+| Separate windows and collection dates | Exposes changes concealed by one average | Two dates and one host are not a population sample |
+| Independent saved-message decoding | Makes response validity auditable | Does not identify resolver cache hits |
+| Fixed browser resource graph | Separates DNS gating from changing content | Excludes native browser DNS and remote transfer |
+
+These controls adapt established methods. The [literature review](docs/LITERATURE_REVIEW.md) compares earlier studies; [discussion arguments](docs/DISCUSSION_ARGUMENTS.md) explain defensible claims. The [source audit](docs/SOURCE_AUDIT.md) ties references to specific passages and boundaries.
+
+## Reproduce the saved results
+
+Use Python 3.12 or later and a compatible Node.js installation. From the repository root:
 
 ```powershell
-npm install
 python -m pip install -r requirements.txt
-node experiment/test_dns.mjs
+python scripts/reproduce.py
 ```
 
-Playwright uses the installed Google Chrome (`channel: 'chrome'`). This code never changes the operating system's DNS servers and does not require administrator rights. Internet collection requires outbound UDP port 53 and TCP port 443 to 1.1.1.1 and 8.8.8.8. An enterprise firewall or restricted sandbox may prevent collection. TLS certificate checks remain enabled.
+The command runs local tests, audits saved packets and treatment conditions, analyzes each date separately, creates robustness tables and figures, and rebuilds the paper. It **does not collect new Internet measurements**. Dependency installation needs Internet access; the saved-data pipeline is offline once dependencies are installed.
 
-## Recalculate the published results without network access
+Measured values, intervals and plots should reproduce from the retained inputs. Generation timestamps may change. [Reproduction details](docs/REPRODUCIBILITY.md) provide individual commands, expected outputs and failure handling.
 
-Run these commands from this package's directory:
+## Execution evidence
 
-```powershell
-python analyze.py --dns data/dns_raw.jsonl --pages data/pages.jsonl --page-dns data/page-dns.jsonl --out results
-python build_paper.py
+This actual browser screenshot shows the offline verification report containing captured command output and data-derived checks. It is not a command-line terminal screenshot. The text log is retained alongside the image.
+
+![Actual browser screenshot of the verification report](docs/evidence/offline-verification.png)
+
+The following screenshot shows the actual fixed browser fixture after a successful live-DNS-gated load. Its evidence run is separate from the analyzed samples.
+
+![Actual controlled browser fixture](docs/evidence/fixture-eight-hostnames.png)
+
+[Capture metadata and logs](docs/evidence/README.md) identify execution times and page identifiers. Screenshots document execution and appearance; raw JSONL remains the numerical evidence.
+
+## Further analysis
+
+![Original paired lookup distributions](figures/lookup_paired_distributions.png)
+
+![Original domain-level effects](figures/domain_effects.png)
+
+![Original controlled page-load effects](figures/page_effects.png)
+
+![Original setup breakdown](figures/setup_breakdown.png)
+
+![Original chronological lookup observations](figures/timing_series.png)
+
+The setup plot is descriptive; it does not isolate encryption cost. All valid observations are retained. p95 from thirty page observations is an unstable descriptive tail estimate.
+
+## Repository structure
+
+```text
+.
+├── README.md
+├── manuscript.md
+├── Secure_DNS_Research_Paper.pdf
+├── scripts/                    # Collection, analysis, plots, checks and paper builder
+├── tests/                      # Local research-property and packet tests
+├── data/                       # Immutable original measurements and metadata
+│   └── replication-2026-11-19/  # Separately retained second-date data
+├── results/                    # Original summaries and sensitivity tables
+│   └── replication-2026-11-19/  # Second-date summaries
+├── figures/                    # PNG and vector scientific plots
+├── docs/                       # Methods, literature, limitations and evidence
+├── package.json
+├── package-lock.json
+├── requirements.txt
+├── profile.json
+└── SHA256SUMS.txt
 ```
 
-The analysis checks saved DNS packets independently, verifies treatment/connection conditions, reports failure counts, and runs in-memory arithmetic checks. It uses 4,000 seeded, window-stratified paired bootstrap resamples. The saved point estimates and intervals should reproduce from the retained data. Output timestamps may differ. The PDF builder requires the complete 1,800/360 dataset and rejects audit warnings. Times New Roman is embedded from Windows fonts when available, with standard PDF Times as a fallback.
+## Collect a new replication
 
-To personalize the final PDF, fill `repository_url` in `profile.json` with the actual evidence URL, then run `python build_paper.py`. The builder writes `Secure_DNS_Research_Paper.pdf` when author name, student ID and URL are all present. It does not upload or verify repository permissions. Independently test the link and inspect the PDF. The source file remains available if editorial changes are needed.
+New measurements require outbound UDP 53 and TCP 443 to the providers, plus installed Google Chrome for the browser fixture. Collectors do not change operating system DNS settings. Install the pinned browser library with `npm ci`, then follow [the collection procedure](docs/REPRODUCIBILITY.md#collect-an-independent-replication). Use fresh output directories and retain all attempts. Do not overwrite the distributed raw data.
 
-## Collect an independent replication
+## Interpretation boundaries
 
-Use fresh output directories. Do not overwrite the distributed measurements. Start with the packet checks above. A full direct-lookup run takes approximately eleven minutes on a responsive network:
+Remote cache state is unknown. Prewarming encourages reuse without proving hits or misses. The same provider and IP do not prove identical physical infrastructure.
 
-```powershell
-node experiment/measure_dns.mjs --out replication/dns --windows 3 --reps 10 --interval-seconds 300 --seed 20261115
-```
+The browser fixture validates DNS answers but **does not contact their addresses**. Playwright delivers fixed local content after DNS completes. This is a controlled dependency experiment, rather than native browser DoH or real website loading. Load-event time is not visual completeness or interactivity. CPU cycles and energy were not measured.
 
-This produces three direct-DNS windows five minutes apart. All attempts and priming are retained; there are no retries. For a separate controlled browser replication, run:
-
-```powershell
-node page-load.mjs --window w1 --reps 10 --out replication/pages
-node page-load.mjs --window w2 --reps 10 --out replication/pages
-node page-load.mjs --window w3 --reps 10 --out replication/pages
-```
-
-Allow several minutes between page windows and avoid simultaneous lookup/page collection or heavy network traffic. In the distributed study, each page window ran after a direct-DNS window, with no overlap. The direct-DNS window spacing is fixed; page window spacing is documented by actual timestamps rather than assumed to be exactly five minutes. Reusing a page window ID in the same directory is rejected.
-
-Analyze the new data in its own results directory:
-
-```powershell
-python analyze.py --dns replication/dns/dns_raw.jsonl --pages replication/pages/pages.jsonl --page-dns replication/pages/page-dns.jsonl --out replication/results
-```
-
-Network timings will differ. Do not replace only a few cells in the old manuscript with new results. Recalculate all tables, reassess claims and keep the datasets distinguishable.
-
-## What the browser fixture measures
-
-The fixture waits for a live DNS result before fulfilling each distinct hostname's browser requests with fixed local HTML/SVG bytes. One page has one hostname; the other has eight. There are seven images in both cases. Concurrent requests share an in-flight DNS promise per hostname. UDP is direct. DoH fresh opens one new session per page, while DoH established primes one session before navigation. All names in a page share that DoH session.
-
-The DNS answer IP is recorded and validated but not used for content delivery. Chrome's native DNS, remote site TLS, Internet content transfer and site changes are bypassed. `plt_ms` is observed Navigation Timing load-event time for this fixture. It is neither a prediction of real-site load time nor a native-browser DoH benchmark. For fresh page loads, `gate_ms` includes explicit connection setup while the nested client's `elapsed_ms` begins after that explicit setup; do not confuse these fields. For fresh direct lookups, `elapsed_ms` includes lazy connection setup.
-
-## Research integrity and privacy
-
-Only recorded real attempts contribute to the reported results. Artificial arrays in the analysis self-check are used in memory solely to verify arithmetic and are never exported as research observations. Data includes public test domain names, public provider addresses and DNS answers, but not local interface addresses, usernames, credentials or browsing history. `profile.json` and the paper intentionally contain the student's supplied name and ID, which may be omitted from a public repository if a private reviewer-accessible copy supplies the course identity instead. Retain a correct link and identity in the assessed PDF.
-
-This package was prepared with OpenAI Codex assistance. Automated verification does not constitute the student's independent verification. The declaration in the manuscript must remain accurate after the student's final review.
+Read [the limitations](docs/LIMITATIONS.md) before generalizing. The assessed PDF contains the required research declarations and the evidence-repository URL.

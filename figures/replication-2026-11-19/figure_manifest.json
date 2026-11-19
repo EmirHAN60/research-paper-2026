@@ -1,0 +1,110 @@
+{
+  "matplotlib_version": "3.10.7",
+  "figures": [
+    {
+      "stem": "lookup_ecdf",
+      "date": "2026-11-19",
+      "dataset": "replication-2026-11-19",
+      "files": [
+        "lookup_ecdf.png",
+        "lookup_ecdf.pdf",
+        "lookup_ecdf.svg"
+      ],
+      "caption": "Empirical cumulative distributions of successful direct lookup latency on 2026-11-19. Each provider/mode has 300 observations in the distributed complete dataset. Fresh DoH creates a new connection per query; established DoH reuses one connection per provider/window. Every successful observation is shown; tails are not trimmed.",
+      "source": "Retained JSONL observations and authoritative summary.json; no generated observations.",
+      "width_inches": 6.5,
+      "height_inches": 3.5,
+      "png_dpi": 220
+    },
+    {
+      "stem": "lookup_paired_distributions",
+      "date": "2026-11-19",
+      "dataset": "replication-2026-11-19",
+      "files": [
+        "lookup_paired_distributions.png",
+        "lookup_paired_distributions.pdf",
+        "lookup_paired_distributions.svg"
+      ],
+      "caption": "Each dot is a successful matched DoH-minus-UDP difference. Vertical jitter only separates overlapping dots. Boxes span the interquartile range, central lines show medians, and whiskers span the complete observed range. Axes vary between panels to expose established-session variation. No outlier is excluded.",
+      "source": "Retained JSONL observations and authoritative summary.json; no generated observations.",
+      "width_inches": 6.5,
+      "height_inches": 4.8,
+      "png_dpi": 220
+    },
+    {
+      "stem": "window_effects",
+      "date": "2026-11-19",
+      "dataset": "replication-2026-11-19",
+      "files": [
+        "window_effects.png",
+        "window_effects.pdf",
+        "window_effects.svg"
+      ],
+      "caption": "Median matched lookup differences calculated separately for each of the three nearby windows. Lines join observed medians as a visual guide, not a temporal model. Panels have separate vertical scales. A sign reversal in established-session differences is evidence of sensitivity within the sampled session, even when the pooled conditional interval excludes zero.",
+      "source": "Retained JSONL observations and authoritative summary.json; no generated observations.",
+      "width_inches": 6.5,
+      "height_inches": 3.5,
+      "png_dpi": 220
+    },
+    {
+      "stem": "domain_effects",
+      "date": "2026-11-19",
+      "dataset": "replication-2026-11-19",
+      "files": [
+        "domain_effects.png",
+        "domain_effects.pdf",
+        "domain_effects.svg"
+      ],
+      "caption": "Each point is a domain-specific median paired lookup difference across its repetitions and three windows. Provider markers are vertically offset for legibility. Panels have separate horizontal scales. The ten chosen names are a fixed workload, not a random sample of all Internet domains.",
+      "source": "Retained JSONL observations and authoritative summary.json; no generated observations.",
+      "width_inches": 6.5,
+      "height_inches": 5.1,
+      "png_dpi": 220
+    },
+    {
+      "stem": "page_effects",
+      "date": "2026-11-19",
+      "dataset": "replication-2026-11-19",
+      "files": [
+        "page_effects.png",
+        "page_effects.pdf",
+        "page_effects.svg"
+      ],
+      "caption": "Median paired fixture load-event differences relative to UDP, with the original descriptive 95% within-window paired-bootstrap intervals. Each condition contains thirty matched navigations. Fresh DoH opens one shared connection per page; established setup occurs before navigation. These are fixed local-content DNS-gated browser loads, not native-browser DoH or general website performance.",
+      "source": "Retained JSONL observations and authoritative summary.json; no generated observations.",
+      "width_inches": 6.5,
+      "height_inches": 4.0,
+      "png_dpi": 220
+    },
+    {
+      "stem": "setup_breakdown",
+      "date": "2026-11-19",
+      "dataset": "replication-2026-11-19",
+      "files": [
+        "setup_breakdown.png",
+        "setup_breakdown.pdf",
+        "setup_breakdown.svg"
+      ],
+      "caption": "Medians and interquartile ranges of the recorded connection stage, remaining time (individual elapsed minus connection time), and total fresh lookup time. Marginal medians are shown separately and must not be added. The connection stage includes networking and client handling of TCP/TLS/HTTP2 setup; neither component isolates cryptographic CPU cost.",
+      "source": "Retained JSONL observations and authoritative summary.json; no generated observations.",
+      "width_inches": 6.5,
+      "height_inches": 3.7,
+      "png_dpi": 220
+    },
+    {
+      "stem": "timing_series",
+      "date": "2026-11-19",
+      "dataset": "replication-2026-11-19",
+      "files": [
+        "timing_series.png",
+        "timing_series.pdf",
+        "timing_series.svg"
+      ],
+      "caption": "Every successful measured lookup plotted against its actual start time relative to the first measured lookup. Gaps separate the three measurement windows. No smoothing, time interpolation or outlier removal is applied. Chronological changes can be shared by neighboring trials and limit independence.",
+      "source": "Retained JSONL observations and authoritative summary.json; no generated observations.",
+      "width_inches": 6.5,
+      "height_inches": 4.7,
+      "png_dpi": 220
+    }
+  ]
+}

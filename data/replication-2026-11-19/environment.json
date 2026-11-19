@@ -1,0 +1,50 @@
+{
+  "study": "Direct same-provider DNS transport benchmark",
+  "started_utc": "2026-11-19T18:58:19.475Z",
+  "client_timezone": "Europe/Warsaw",
+  "execution_timezone": "Europe/Warsaw",
+  "platform": "win32",
+  "release": "10.0.26200",
+  "arch": "x64",
+  "cpu_model": "AMD Ryzen 7 7700 8-Core Processor              ",
+  "logical_cpus": 16,
+  "total_memory_gib": 30.88082504272461,
+  "node": "v24.22.3",
+  "openssl": "3.5.9",
+  "providers": {
+    "cloudflare": {
+      "ip": "1.1.1.1",
+      "host": "cloudflare-dns.com",
+      "path": "/dns-query"
+    },
+    "google": {
+      "ip": "8.8.8.8",
+      "host": "dns.google",
+      "path": "/dns-query"
+    }
+  },
+  "domains": [
+    "example.com",
+    "wikipedia.org",
+    "mozilla.org",
+    "github.com",
+    "cloudflare.com",
+    "google.com",
+    "microsoft.com",
+    "apple.com",
+    "bbc.com",
+    "amazon.com"
+  ],
+  "windows": 3,
+  "reps": 10,
+  "interval_seconds": 300,
+  "seed": 20261119,
+  "qtype": "A",
+  "transport": "IPv4",
+  "timeout_ms": 3000,
+  "policy": "All attempts retained. No retries. Query response and validation retained. Local OS resolver bypassed. Resolver cache pre-primed but hit status unobservable. Fresh DoH uses new TLS socket without session resumption.",
+  "status": "complete",
+  "finished_utc": "2026-11-19T19:09:50.155Z",
+  "total_rows": 1920,
+  "valid_rows": 1920
+}

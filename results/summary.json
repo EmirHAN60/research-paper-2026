@@ -1,9 +1,13 @@
 {
-  "generated_utc": "2026-11-15T14:58:19.950672+00:00",
+  "generated_utc": "2026-11-19T19:16:51.432323+00:00",
   "inputs": {
-    "dns": "data\\dns_raw.jsonl",
-    "pages": "data\\pages.jsonl",
-    "page_dns": "data\\page-dns.jsonl"
+    "dns": "data/dns_raw.jsonl",
+    "pages": "data/pages.jsonl",
+    "page_dns": "data/page-dns.jsonl"
+  },
+  "expected_design": {
+    "windows": 3,
+    "reps": 10
   },
   "seed": 20261115,
   "resamples": 4000,
@@ -2960,6 +2964,7 @@
       "udp_pages_checked": 120,
       "pages_with_treatment_errors": 0,
       "validation_errors": [],
+      "unsuccessful_pages_with_diagnostics": [],
       "transport_mismatches": [],
       "navigation_rows_without_completed_page": 0,
       "interpretation": "DoH query preexisting=true is expected in both page modes because the collector explicitly opens the connection before querying. Continuous numbering (fresh 1..N, established 2..N+1), identical stored connect_ms, h2 and no TLS resumption were checked per page. No socket UUID was recorded."

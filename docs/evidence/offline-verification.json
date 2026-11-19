@@ -1,0 +1,12 @@
+{
+  "captured_utc": "2026-11-19T19:17:35.532Z",
+  "browser": "157.0.8103.79",
+  "source": "Actual Playwright screenshot of a locally rendered evidence report, not an emulated terminal",
+  "verification_scope": "completed offline reproduction",
+  "log_snapshot": "offline-verification-source.log",
+  "log_sha256": "ca3dee6abaae388acdf5b90e99a07b5206a39c14bbef7d2d018ecab2f110118b",
+  "original_input_hashes_match": true,
+  "lookup_attempts": 3600,
+  "page_attempts": 720,
+  "failed_measured_attempts": 0
+}
